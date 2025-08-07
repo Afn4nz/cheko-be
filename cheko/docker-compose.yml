@@ -1,0 +1,15 @@
+version: '3.5'
+
+services:
+
+  db-server:
+    image: postgres:latest
+    container_name: postgres-db-server
+    hostname: postgres-db-server
+    environment:
+      - POSTGRES_USER=sa
+      - POSTGRES_PASSWORD=Aa12345!!
+      - POSTGRES_DB=cheko
+      - PGPORT=5432
+    ports:
+      - "5432:5432"
