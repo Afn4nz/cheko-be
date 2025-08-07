@@ -1,11 +1,14 @@
 package com.ncai.cheko.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
+@Getter
 public class Item extends BaseEntity {
     private String name;
     private String description;
@@ -17,6 +20,6 @@ public class Item extends BaseEntity {
     private double price;
     private double calories;
 
-    @ManyToMany(mappedBy = "items", fetch = FetchType.LAZY)
-    private Set<Order> orders;
+    @OneToMany(mappedBy = "item")
+    private List<OrderItem> orderItems = new ArrayList<>();
 }

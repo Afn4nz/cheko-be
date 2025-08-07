@@ -77,7 +77,7 @@
             <column name="item_id" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="fk_order_item_item" references="item(id)"/>
             </column>
-            <column name="quantity" type="INT">
+            <column name="amount" type="INT">
                 <constraints nullable="false"/>
             </column>
         </createTable>
