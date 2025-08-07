@@ -19,5 +19,5 @@ public abstract class AuditEntity extends BaseEntity {
     @Column(nullable = false, updatable = false)
     @CreatedDate
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createdDate;
+    private LocalDateTime created_at;
 }
