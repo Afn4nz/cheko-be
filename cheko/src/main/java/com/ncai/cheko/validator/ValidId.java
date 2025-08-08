@@ -1,4 +1,4 @@
-package validator;
+package com.ncai.cheko.validator;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
