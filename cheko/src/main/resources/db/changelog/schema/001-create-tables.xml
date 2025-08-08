@@ -42,9 +42,6 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="VARCHAR(100)">
-                <constraints nullable="false"/>
-            </column>
             <column name="lat" type="DOUBLE PRECISION"/>
             <column name="lon" type="DOUBLE PRECISION"/>
         </createTable>

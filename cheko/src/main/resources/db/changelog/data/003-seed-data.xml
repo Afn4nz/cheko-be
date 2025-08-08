@@ -1,0 +1,21 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+      http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    
+    <!-- 8: Seed Restaurant Locations -->
+    <changeSet id="8" author="a.alzuair">
+        <insert tableName="restaurant">
+            <column name="id" valueNumeric="1"/>
+            <column name="lat" valueNumeric="24.753323"/>
+            <column name="lon" valueNumeric="46.583318"/>
+        </insert>
+        <insert tableName="restaurant">
+            <column name="id" valueNumeric="2"/>
+            <column name="lat" valueNumeric="24.7486408"/>
+            <column name="lon" valueNumeric="46.6384786"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

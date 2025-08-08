@@ -18,6 +18,9 @@ public class ApiResponse<T> implements Serializable {
     List<String> errors;
     String message;
 
+    public static <T> ResponseEntity<ApiResponse<T>> getSuccessResponse(String message) {
+        return getResponse(null, Collections.emptyList(), HttpStatus.OK, message);
+    }
     public static <T> ResponseEntity<ApiResponse<T>> getSuccessResponse(T data) {
         return getResponse(data, Collections.emptyList(), HttpStatus.OK, null);
     }
