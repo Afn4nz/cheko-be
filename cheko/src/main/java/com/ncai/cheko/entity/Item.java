@@ -3,6 +3,7 @@ package com.ncai.cheko.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class Item extends BaseEntity {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    private double price;
+    private BigDecimal price;
     private double calories;
 
     @OneToMany(mappedBy = "item")

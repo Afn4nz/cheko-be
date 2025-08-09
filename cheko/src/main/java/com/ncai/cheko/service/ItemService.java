@@ -1,21 +1,21 @@
 package com.ncai.cheko.service;
 
 import com.ncai.cheko.Spesifications.ItemSpecification;
-import com.ncai.cheko.dto.FilterOptionResponse;
-import com.ncai.cheko.dto.ItemDetailsResponse;
-import com.ncai.cheko.dto.ItemResponse;
-import com.ncai.cheko.dto.PaginatedResponse;
+import com.ncai.cheko.dto.*;
 import com.ncai.cheko.entity.Item;
 import com.ncai.cheko.mapper.CategoryMapper;
 import com.ncai.cheko.mapper.ItemMapper;
 import com.ncai.cheko.repository.CategoryRepository;
 import com.ncai.cheko.repository.ItemRepository;
+import org.springframework.cache.annotation.Cacheable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,5 +47,13 @@ public class ItemService {
         return categoryRepository.findAll().stream()
                 .map(categoryMapper::mapToFilterOptionResponse)
                 .collect(Collectors.toList());
+    }
+
+    @Cacheable(value = "itemPrice:all")
+    public Map<Long, BigDecimal> getPriceMap() {
+        return itemRepository.findAllPrices().stream()
+                .collect(
+                        Collectors.toMap(
+                                ItemPriceProjection::getId, ItemPriceProjection::getPrice));
     }
 }
