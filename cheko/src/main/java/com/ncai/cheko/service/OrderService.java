@@ -27,14 +27,15 @@ public class OrderService {
     private final ItemRepository itemRepository;
     private final OrderItemMapper orderItemMapper;
     private final OrderItemRepository orderItemRepository;
+    private final ItemService itemService;
 
     @Transactional
     public void placeOrder(OrderRequest orderRequest) {
         List<Long> itemIds = orderRequest.getItems().stream().map(ItemRequest::getItemId).toList();
-        List<Item> items = itemRepository.findAllByIdIn(itemIds); // TODO: cache prices
+        List<Item> items = itemRepository.findAllByIdIn(itemIds);
 
         Order order = new Order();
-        order.setTotal(OrderUtil.calculateTotalPrice(items, orderRequest));
+        order.setTotal(OrderUtil.calculateTotalPrice(itemService.getPriceMap(), orderRequest));
         orderRepository.save(order);
 
         Map<Long, Item> itemLookup =

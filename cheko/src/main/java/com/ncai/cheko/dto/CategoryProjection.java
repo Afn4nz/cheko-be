@@ -1,12 +1,9 @@
 package com.ncai.cheko.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+public interface CategoryProjection {
+    Long getId();
 
-@Data
-@AllArgsConstructor
-public class CategoryProjection {
-     private Long id;
-     private String name;
-     private Long itemCount;
+    String getName();
+
+    Long getItemCount();
 }
