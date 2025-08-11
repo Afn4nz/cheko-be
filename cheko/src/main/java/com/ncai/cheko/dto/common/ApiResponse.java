@@ -1,4 +1,4 @@
-package com.ncai.cheko.dto;
+package com.ncai.cheko.dto.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -12,21 +12,39 @@ import java.util.Collections;
 import java.util.List;
 
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+
 public class ApiResponse<T> implements Serializable {
+    boolean success;
     T data;
-    List<String> errors;
+    List<ErrorResponse> errors;
     String message;
 
     public static <T> ResponseEntity<ApiResponse<T>> getSuccessResponse(String message) {
         return getResponse(null, Collections.emptyList(), HttpStatus.OK, message);
     }
+
     public static <T> ResponseEntity<ApiResponse<T>> getSuccessResponse(T data) {
         return getResponse(data, Collections.emptyList(), HttpStatus.OK, null);
     }
 
+    public static ResponseEntity<Object> getFailureResponse(
+            List<ErrorResponse> errors, HttpStatus httpStatus) {
+        return getFailureResponse(null, errors, httpStatus);
+    }
+
+    public static <T> ResponseEntity<Object> getFailureResponse(
+            T data, List<ErrorResponse> errors, HttpStatus httpStatus) {
+        ApiResponse<Object> response = new ApiResponse<>();
+
+        response.setData(data);
+        response.setErrors(errors);
+
+        return new ResponseEntity<>(response, httpStatus);
+    }
+
     private static <T> ResponseEntity<ApiResponse<T>> getResponse(
-            T data, List<String> errors, HttpStatus httpStatus, String message) {
+            T data, List<ErrorResponse> errors, HttpStatus httpStatus, String message) {
         ApiResponse<T> response = new ApiResponse<>();
         response.setData(data);
         response.setErrors(errors);

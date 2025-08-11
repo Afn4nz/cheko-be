@@ -1,16 +1,18 @@
 package com.ncai.cheko.controller;
 
 import com.ncai.cheko.Spesifications.ItemSpecification;
-import com.ncai.cheko.dto.ApiResponse;
+import com.ncai.cheko.dto.common.ApiResponse;
 import com.ncai.cheko.entity.Item;
 import com.ncai.cheko.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.ncai.cheko.validator.ValidId;
 
+@Validated
 @RestController
 @RequestMapping("/items")
 @RequiredArgsConstructor

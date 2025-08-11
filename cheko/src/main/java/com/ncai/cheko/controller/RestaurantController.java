@@ -1,6 +1,6 @@
 package com.ncai.cheko.controller;
 
-import com.ncai.cheko.dto.ApiResponse;
+import com.ncai.cheko.dto.common.ApiResponse;
 import com.ncai.cheko.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

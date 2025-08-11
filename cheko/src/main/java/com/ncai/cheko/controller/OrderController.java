@@ -1,6 +1,6 @@
 package com.ncai.cheko.controller;
 
-import com.ncai.cheko.dto.ApiResponse;
+import com.ncai.cheko.dto.common.ApiResponse;
 import com.ncai.cheko.dto.OrderRequest;
 import com.ncai.cheko.service.OrderService;
 import jakarta.validation.Valid;

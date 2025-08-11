@@ -1,4 +1,4 @@
-package com.ncai.cheko.dto;
+package com.ncai.cheko.dto.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
