@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,10 +34,9 @@ public class ItemService {
     public PaginatedResponse<ItemResponse> getAllItems(
             ItemSpecification specification, Pageable pageable) {
         Page<Item> itemsPage = itemRepository.findAll(specification, pageable);
+
         return new PaginatedResponse<>(
-                itemsPage.getContent().stream()
-                        .map(itemMapper::mapToItemResponse)
-                        .collect(Collectors.toList()),
+                itemMapper.toItemResponseList(itemsPage.getContent(), getBestSellingItemIds()),
                 itemsPage.getNumber(),
                 itemsPage.getSize(),
                 itemsPage.getTotalElements(),
@@ -44,7 +44,8 @@ public class ItemService {
     }
 
     public ItemDetailsResponse getItemDetails(Long id) {
-        return itemMapper.mapToItemDetailsResponse(itemRepository.findById(id).get());
+        return itemMapper.mapToItemDetailsResponse(
+                itemRepository.findById(id).get(), getBestSellingItemIds());
     }
 
     public List<FilterOptionResponse> getCategoriesFilter() {
@@ -60,4 +61,10 @@ public class ItemService {
                         Collectors.toMap(
                                 ItemPriceProjection::getId, ItemPriceProjection::getPrice));
     }
+
+    @Cacheable(value = "bestSellingItemIds")
+    public Set<Long> getBestSellingItemIds() {
+        return itemRepository.findBestSellingItemIds();
+    }
+
 }
