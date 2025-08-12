@@ -7,9 +7,10 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class ItemResponse { //TODO: add the best sale field
+public class ItemResponse {
     private Long id;
     private String name;
     private int calories;
     private BigDecimal price;
+    private boolean bestSelling;
 }

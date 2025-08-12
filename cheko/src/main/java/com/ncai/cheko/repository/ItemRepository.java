@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long>, JpaSpecificationExecutor<Item> {
@@ -15,4 +16,19 @@ public interface ItemRepository extends JpaRepository<Item, Long>, JpaSpecificat
 
     @Query(value = "select i.id as id, i.price as price from Item i")
     List<ItemPriceProjection> findAllPrices();
+
+    @Query(
+            value =
+                    """
+                    SELECT oi.item_id
+                    FROM orders_items oi
+                    JOIN orders o ON o.id = oi.order_id
+                    WHERE o.created_at >= (NOW() - INTERVAL '30 days')
+                      AND o.created_at < NOW()
+                    GROUP BY oi.item_id
+                    ORDER BY SUM(oi.amount) DESC, oi.item_id
+                    LIMIT 5
+                    """,
+            nativeQuery = true)
+    Set<Long> findBestSellingItemIds();
 }
