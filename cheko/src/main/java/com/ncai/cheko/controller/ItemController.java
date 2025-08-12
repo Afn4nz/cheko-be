@@ -25,7 +25,7 @@ public class ItemController {
         return ApiResponse.getSuccessResponse(itemService.getAllItems(specification, pageable));
     }
 
-    @GetMapping("/{id}") //TODO: Handle the exception
+    @GetMapping("/{id}")
     public ResponseEntity<?> getItemDetails(@PathVariable @ValidId(entity = Item.class) Long id) {
         return ApiResponse.getSuccessResponse(itemService.getItemDetails(id));
     }
@@ -33,5 +33,10 @@ public class ItemController {
    @GetMapping("/filter")
     public ResponseEntity<?> getCategoryFilter() {
         return ApiResponse.getSuccessResponse(itemService.getCategoriesFilter());
+    }
+
+    @GetMapping("/top")
+    public ResponseEntity<?> getTopNCalories(@RequestParam(value = "topN", defaultValue = "2") int topN) {
+        return ApiResponse.getSuccessResponse(itemService.findTopNItemsPerCategoryByCalories(topN));
     }
 }

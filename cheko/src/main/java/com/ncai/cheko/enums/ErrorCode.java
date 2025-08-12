@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum ErrorCode {
     GENERIC_INVALID_ID_INPUT(2001, "Please enter a valid ID.", HttpStatus.BAD_REQUEST),
-    AMOUNT_MIN_VALUE(2002, "The amount should be grater than zero", HttpStatus.BAD_REQUEST),
+    QUANTITY_MIN_VALUE(2002, "The quantity should be grater than zero", HttpStatus.BAD_REQUEST),
     VALIDATION_FAILED(2003, "Validation failed", HttpStatus.BAD_REQUEST),
     DUPLICATE_ITEM_ID(2004, "DUPLICATE_ITEM_ID", HttpStatus.BAD_REQUEST),
     INTERNAL_SERVER(5000, "Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);

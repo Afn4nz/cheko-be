@@ -54,7 +54,7 @@ public class ItemService {
                 .collect(Collectors.toList());
     }
 
-    @Cacheable(value = "itemPrice:all")
+    @Cacheable(value = "itemsPrices")
     public Map<Long, BigDecimal> getPriceMap() {
         return itemRepository.findAllPrices().stream()
                 .collect(
@@ -65,6 +65,10 @@ public class ItemService {
     @Cacheable(value = "bestSellingItemIds")
     public Set<Long> getBestSellingItemIds() {
         return itemRepository.findBestSellingItemIds();
+    }
+
+    public List<TopNItemsPerCategoryByCalories> findTopNItemsPerCategoryByCalories(int topN) {
+        return itemRepository.findTopNItemsPerCategoryByCalories(topN);
     }
 
 }
