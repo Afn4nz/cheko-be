@@ -17,7 +17,7 @@ public class OrderUtil {
                                 item ->
                                         priceById
                                                 .get(item.getItemId())
-                                                .multiply(BigDecimal.valueOf(item.getAmount())))
+                                                .multiply(BigDecimal.valueOf(item.getQuantity())))
                         .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         return subtotal.multiply(BigDecimal.valueOf(1).add(BigDecimal.valueOf(TAX)));

@@ -15,6 +15,6 @@ public class ItemRequest {
     private Long itemId;
 
     @NotNull
-    @Min(value = 1, message = "AMOUNT_MIN_VALUE")
-    private int amount;
+    @Min(value = 1, message = "QUANTITY_MIN_VALUE")
+    private int quantity;
 }

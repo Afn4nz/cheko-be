@@ -13,7 +13,6 @@ import java.util.List;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-
 public class ApiResponse<T> implements Serializable {
     boolean success;
     T data;
@@ -21,31 +20,30 @@ public class ApiResponse<T> implements Serializable {
     String message;
 
     public static <T> ResponseEntity<ApiResponse<T>> getSuccessResponse(String message) {
-        return getResponse(null, Collections.emptyList(), HttpStatus.OK, message);
+        return getResponse(true, null, Collections.emptyList(), HttpStatus.OK, message);
     }
 
     public static <T> ResponseEntity<ApiResponse<T>> getSuccessResponse(T data) {
-        return getResponse(data, Collections.emptyList(), HttpStatus.OK, null);
-    }
-
-    public static ResponseEntity<Object> getFailureResponse(
-            List<ErrorResponse> errors, HttpStatus httpStatus) {
-        return getFailureResponse(null, errors, httpStatus);
+        return getResponse(true, data, Collections.emptyList(), HttpStatus.OK, null);
     }
 
     public static <T> ResponseEntity<Object> getFailureResponse(
-            T data, List<ErrorResponse> errors, HttpStatus httpStatus) {
+            List<ErrorResponse> errors, HttpStatus httpStatus) {
         ApiResponse<Object> response = new ApiResponse<>();
-
-        response.setData(data);
+        response.setSuccess(false);
         response.setErrors(errors);
 
         return new ResponseEntity<>(response, httpStatus);
     }
 
     private static <T> ResponseEntity<ApiResponse<T>> getResponse(
-            T data, List<ErrorResponse> errors, HttpStatus httpStatus, String message) {
+            boolean success,
+            T data,
+            List<ErrorResponse> errors,
+            HttpStatus httpStatus,
+            String message) {
         ApiResponse<T> response = new ApiResponse<>();
+        response.setSuccess(success);
         response.setData(data);
         response.setErrors(errors);
         response.setMessage(message);
