@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "20fc0ea4-0b30-49b6-8767-4ab149fc5031",
+		"name": "Cheko",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24645265"
+	},
+	"item": [
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/cheko/categories",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cheko",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Items",
+			"item": [
+				{
+					"name": "All items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/cheko/items?categoryId=2&search=FR",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cheko",
+								"items"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "2"
+								},
+								{
+									"key": "search",
+									"value": "FR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Item Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/cheko/items/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cheko",
+								"items",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Top Item by Calories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/cheko/items/top",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cheko",
+								"items",
+								"top"
+							],
+							"query": [
+								{
+									"key": "topN",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Branches",
+			"item": [
+				{
+					"name": "Locations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/cheko/locations",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cheko",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Orders total",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/cheko/orders/total",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cheko",
+								"orders",
+								"total"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Place Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"items\": [\r\n        {\r\n            \"itemId\": 5,\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/cheko/orders",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cheko",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
