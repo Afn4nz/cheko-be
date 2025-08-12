@@ -1,23 +1,31 @@
-version: '3.5'
-
 services:
-
-  db-server:
-    image: postgres:latest
-    container_name: postgres-db-server
-    hostname: postgres-db-server
+  db:
+    image: postgres:16-alpine
     environment:
-      - POSTGRES_USER=sa
-      - POSTGRES_PASSWORD=Aa12345!!
-      - POSTGRES_DB=cheko
-      - PGPORT=5432
-    ports:
-      - "5432:5432"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    # no ports, no healthcheck
 
-  redis-server:
+  redis:
     image: redis:7-alpine
-    container_name: redis-server
-    hostname: redis-server
+    # no ports, no healthcheck
+
+  backend:
+    build: .
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+    depends_on:
+      - db
+      - redis
     ports:
-      - "6379:6379"
-    command: ["redis-server", "--appendonly", "yes"]
+      - "8080:8080"
+
+volumes:
+  db_data:
