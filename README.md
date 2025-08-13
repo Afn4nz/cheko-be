@@ -5,7 +5,7 @@
  
 ## 📘 Swagger
 
-- **Interactive docs UI:** [http://localhost:8080/cheko/swagger](http://localhost:8080/cheko/swagger)  
+- **Interactive docs UI:** [http://localhost:8080/cheko/swagger](http://localhost:8080/cheko/swagger-ui/index.html)  
 
 ##  📂 Architecture Choice:
  Given the project’s small scope, Cheko uses a simple layered structure:
@@ -34,7 +34,7 @@ Then edit .env to match your local environment.
 
 You can import the ready-made Postman collection into your Postman app.
 
-**Download here:** [Cheko.postman_collection.json](postman/Cheko.postman_collection.json)
+**Download here:** [Cheko.postman_collection.json](cheko/postman/Cheko.postman_collection.json)
 
 ### How to Import
 1. Download the JSON file above  
